@@ -24,7 +24,7 @@ class QuoteScraper:
 
         try:
             print(f"Preparing drivers...")
-            subprocess.call("playwright install", shell=True)
+            subprocess.call("playwright install chromium", shell=True)
         except Exception as e:
             print(f"Error during Playwright installation: {e}")
             exit(1)
