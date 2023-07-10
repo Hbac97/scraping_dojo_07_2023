@@ -11,7 +11,7 @@ This script is a web scraper that extracts quotes from a website and saves them 
 
 1. Clone the repository:
 
-git clone [<repository_url>](https://github.com/Hbac97/scraping_dojo_07_2023)
+git clone https://github.com/Hbac97/scraping_dojo_07_2023
 
 2. Install the required dependencies:
 
