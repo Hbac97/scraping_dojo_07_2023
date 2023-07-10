@@ -63,7 +63,6 @@ class QuoteScraper:
 
     async def scrape_quotes(self, context):
         quotes = []
-
         page = await context.new_page()
         delay_value = self.get_initial_delay() or 10
 
@@ -73,11 +72,9 @@ class QuoteScraper:
             await asyncio.sleep(delay_value+2)
 
             page_content = await page.content()
-
             soup = BeautifulSoup(page_content, "html.parser")
-
-
             quote_elements = soup.find_all(class_="quote")
+            
             if not quote_elements:
                 print("No quotes found. Stopping scraping.")
                 break
@@ -86,7 +83,6 @@ class QuoteScraper:
                 text = quote_element.find(class_="text").get_text()
                 author = quote_element.find(class_="author").get_text()
                 tags = [tag.get_text() for tag in quote_element.find_all(class_="tag")]
-
                 quote = {"text": text, "by": author, "tags": tags}
                 quotes.append(quote)
 
