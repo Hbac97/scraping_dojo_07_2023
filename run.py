@@ -10,7 +10,6 @@ import asyncio
 import requests
 from urllib.parse import urljoin, urlparse
 
-
 class QuoteScraper:
     def __init__(self):
         load_dotenv()
