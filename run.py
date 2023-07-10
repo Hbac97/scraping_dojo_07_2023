@@ -2,7 +2,6 @@ import os
 import subprocess
 import re
 from dotenv import load_dotenv
-from importlib.util import find_spec
 from playwright.async_api import async_playwright
 from bs4 import BeautifulSoup
 import jsonlines
@@ -12,19 +11,23 @@ from urllib.parse import urljoin, urlparse
 
 class QuoteScraper:
     def __init__(self):
+
+        if not os.path.exists(".env"):
+            print("The .env file does not exist. Make sure to create it with the required environment variables.")
+            exit(1)
+
         load_dotenv()
         self.proxy = os.getenv("PROXY")
         self.input_url = os.getenv("INPUT_URL")
         self.output_file = os.getenv("OUTPUT_FILE")
         self.base_url = self.get_base_url(self.input_url)
 
-        if find_spec("playwright") is None:
-            try:
-                print(f"Installing Playwright...")
-                subprocess.call("playwright install", shell=True)
-            except Exception as e:
-                print(f"Error during Playwright installation: {e}")
-                exit(1)
+        try:
+            print(f"Preparing drivers...")
+            subprocess.call("playwright install", shell=True)
+        except Exception as e:
+            print(f"Error during Playwright installation: {e}")
+            exit(1)
 
     async def run(self):
         print("Starting scraping process...")
